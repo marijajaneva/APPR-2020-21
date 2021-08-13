@@ -5,10 +5,24 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2020/21
 * [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2020-21/master?urlpath=shiny/APPR-2020-21/projekt.Rmd) Shiny
 * [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2020-21/master?urlpath=rstudio) RStudio
 
-## Tematika
+## Analiza notranjih selitev in stanovanjskih razmer v Sloveniji
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal.
-Tukaj boste napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+V svoji projektni nalogi bom primerjala selitve po regijah v Sloveniji od leta 2000 do leta 2020. Ugotovila bom kakšni so razlogi za selitev iz ene regije v drugo in pri katerih letih se največ prebivalstva odloči za selitev. Pogledala bom tudi kolikšna je stopnja prenaseljenosti stanovanj po regijah. Potem bom analizirala še kakšne so stanovanjske razmere, kolikšno breme predstavljajo stanovanjski stroški in ali so to eni izmed razlogov za selitev.
+
+Vir podatkov: https://pxweb.stat.si/pxweb/Database/Dem_soc/Dem_soc.asp
+
+Tabele: 
+
+Tabela 1: Notanje selitve po regijah (leto, regija, odselitve, priselitve)
+ 
+Tabela 2: Notranje selitve po starostnih skupinah (leto, starostne skupine)
+
+Tabela 3: Prenaseljenost (leto, regija, stopnja prenaseljenosti (%))
+    
+Tabela 4: Stanovanjske razmere (leto, regija, slabo stanje stanovanja, ni primernega ogrevanja, premalo svetlobe, težave s hrupom, onesnaženost okolja, prisotnost kriminala)
+
+Tabela 5: Stanovanjski stroški (leto, regija, veliko breme, srednje veliko breme, nizko breme)
+
 
 ## Program
 
