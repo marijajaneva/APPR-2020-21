@@ -16,12 +16,10 @@ Tabele:
 Tabela 1: Notanje selitve po regijah (leto, regija, odselitve, priselitve)
  
 Tabela 2: Notranje selitve po starostnih skupinah (leto, starostne skupine)
-
-Tabela 3: Prenaseljenost (leto, regija, stopnja prenaseljenosti (%))
     
-Tabela 4: Stanovanjske razmere (leto, regija, slabo stanje stanovanja, ni primernega ogrevanja, premalo svetlobe, težave s hrupom, onesnaženost okolja, prisotnost kriminala)
+Tabela 3: Stanovanjske razmere (leto, regija, slabo stanje stanovanja, ni primernega ogrevanja, premalo svetlobe, težave s hrupom, onesnaženost okolja, prisotnost kriminala)
 
-Tabela 5: Stanovanjski stroški (leto, regija, veliko breme, srednje veliko breme, nizko breme)
+Tabela 4: Stanovanjski stroški (leto, regija, veliko breme, srednje veliko breme, nizko breme)
 
 
 ## Program
