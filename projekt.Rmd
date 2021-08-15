@@ -24,7 +24,7 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Izbira teme
 
-Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+V svoji projektni nalogi bom analizirala selitve po regijah v Sloveniji od leta 2000 do leta 2020. Ugotovila bom kakšni so razlogi za selitev iz ene regije v drugo in pri katerih letih se največ prebivalstva odloči za selitev. Pogledala bom tudi kolikšna je stopnja prenaseljenosti stanovanj po regijah. Potem bom analizirala še kakšne so stanovanjske razmere, kolikšno breme predstavljajo stanovanjski stroški in ali so to eni izmed razlogov za selitev.
 
 ![](slike/grb.png)
 
@@ -36,26 +36,48 @@ Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
-Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
-z Wikipedije. Podatke imamo v dveh razpredelnicah v obliki *tidy data*.
+Uvoziila sem podatke v obliki CSV s statističnega urada: https://pxweb.stat.si/SiStat/sl. Podatke imam v štirih razpredelnicah v obliki *tidy data*.
 
-1. `druzine` - podatki o družinah za vsako občino
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `velikost.druzine` - spremenljivka: število otrok v družini (število: 1, 2, 3 ali 4, kjer zadnja vrednost pomeni 4 ali več),
-  - `stevilo.druzin` - meritev: število družin z ustreznim številom otrok v ustrezni občini (število).
 
-2. `obcine` - podatki o občinah
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `povrsina` - meritev: površina občine v km$^2$ (število),
-  - `prebivalci` - meritev: prebivalstvo občine (število),
-  - `gostota` - meritev: število prebivalcev na km$^2$ (število),
-  - `naselja` - meritev: število naselij v občini (število),
-  - `ustanovitev` - meritev: leto ustanovitve občine (število),
-  - `pokrajina` - meritev: pokrajina, ki ji občina pripada (neurejen faktor),
-  - `regija` - meritev: regija, ki ji občina pripada (neurejen faktor),
-  - `odcepitev` - meritev: podatki o občinah, od katerih se je občina odcepila (besedilo).
+ 1. [Notranje selitve po regijah](https://pxweb.stat.si/SiStatData/pxweb/sl/Data/Data/05N2004S.px/table/tableViewLayout2/)
+  - `regija odselitve` - spremenljivka: ime regije iz katere so se prebivalci izselili((besedilo),
+  - `regija priselitve` - spremenljivka: ime regije, v katero so se prebivalci preselili(besedilo),
+  - `leto` - spremenljivka: katerega leta so se prebivalci preselili iz ene regije v drugo(število),
+  - `stevilo oseb` - meritev: število oseb, ki se je preselilo oz ene regije v drugo(število)
+  
+ 2. [Notranje selitve po starostnih skupinah](https://pxweb.stat.si/SiStatData/pxweb/sl/Data/Data/05N2002S.px/table/tableViewLayout2/) 
+  - `starostna skupina` - spremenljivka: starostna skupina, pri kateri se je prebivalstvo preselilo,
+  - `leto` - spremenljivka - v katerem leto so se prebivalci preselili,
+  - `število oseb` - meritev: število oseb, ki se je preselilo, v danem letu pri določeni starostni skupini.
+  
+ 3. [Stanovanjske razmere](https://pxweb.stat.si/SiStatData/pxweb/sl/Data/Data/0867725S.px/table/tableViewLayout2/)
+  - `leto` - spremenljivka: kakšne stanovanjske razmere so bile v danem letu ,
+  - `regija` - spremenljivka : kakšne stanovanjske razmere so bile v določeni regiji(besedilo),
+  - `slabo stanje stanovanja` - spremenljivka: delež gospodinjstev, ki imajo težave s streho, ki pušča, z vlažnimi stenami ipd.(besedilo)
+  - `ni primernega ogrevanja` - spremenljivka: delež gospodinjstev, ki si ne morejo privoščiti primernega ogrevanja stanovanja (besedilo),
+  - `premalo svetlobe` - spremenljivka: delež gospodinjstev, ki imajo pretemno stanovanje oz. ne dobijo dovolj dnevne svetlobe (besedilo),
+  - `težave s hrupom` - spremenljivka: delež gospodinjstev, ki imajo težave s hrupom sosedov ali hrupom z ulice(promet, tovarne, podjetja ipd.)(besedilo)
+  - `onesnaženost okolja` - spremenljivka: delež gospodinjstev, ki imajo težavo z onesnaženostjo okolja, umazanijo ali drugimi okoljskimi problemi, ki jih povzroča promet in industrija (besedilo)
+  - `prisotnost kriminala`: spremenljivka: delež gospodinjstev, ki imajo težave s kriminalom in nasiljem v okolju, kjer živijo (besedilo)
+  - `število gospodinjstev`- meritev: število gospodinjstev, ki imajo probleme z določenimi stanovanjskimi razmerami (število)
+  
+ 4. [Stanovanjski stroški](https://pxweb.stat.si/SiStatData/pxweb/sl/Data/Data/0868225S.px/table/tableViewLayout2/)
+  -`leto` - spremenljivka: kakšno breme so prebivalcem predstavljali stanovanjski stroški v danem letu,
+  - `regija` - spremenljivka: kakšno breme so prebivalcem predstavljali stanovanjski stroški v dani regiji (besedilo),
+  - `veliko breme` - spremenljivka: delež gospodinjstev, ki so jim stanovanjski stroški predstavljali veliko breme (besedilo),
+  - `srednja veliko breme` - spremenljivka: delež gospodinjstev, ki so jim stanovanjski stroški predstavljali srednje veliko breme (besedilo),
+  - `nizko breme` - spremenljivka: delež gospodinjstev, ki so jim stanovanjski stroški predstavljali nizko breme (besedilo),
+  - `število gospodinjstev` - meritev: število gospodinjstev, ki jim stanovanjski stroški predstavljajo veliko, srednje veliko ali nizko breme (število)
 
-**Opomba**: da bi razpredelnica `obcine` res bila v obliki *tidy data*, bi morali odstraniti stolpec `gostota` (saj je izpeljan iz stolpcev `povrsina` in `prebivalci`), podatke o pokrajinah pa bi morali premakniti v drugo razpredelnico, saj nekatere občine pripadajo dvema pokrajinama. Podobno bi morali narediti tudi s stolpcem `odcepitev`.
+
+
+
+
+
+
+
+
+
 
 Spodnji graf prikazuje porazdelitev števila naselij v občinah.
 
