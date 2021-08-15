@@ -1,5 +1,11 @@
 # 3. faza: Vizualizacija podatkov
 
+graf_selitve_po_starosti <- ggplot(selitve_po_starostnih_skupinah, aes(x=leto, y=starostna_skupina))
+
+print(graf_selitve_po_starosti)
+
+
+
 # Uvozimo zemljevid.
 zemljevid <- uvozi.zemljevid("http://baza.fmf.uni-lj.si/OB.zip", "OB",
                              pot.zemljevida="OB", encoding="Windows-1250")
