@@ -1,55 +1,38 @@
-# 2. faza: Uvoz podatkov
+# 2. faza: Uvoz
 
-sl <- locale("sl", decimal_mark=",", grouping_mark=".")
+library(tidyr)
+library(readr)
+library(dplyr)
+library(rvest)
+library(tidyverse)
 
-# Funkcija, ki uvozi občine iz Wikipedije
-uvozi.obcine <- function() {
-  link <- "http://sl.wikipedia.org/wiki/Seznam_ob%C4%8Din_v_Sloveniji"
-  stran <- html_session(link) %>% read_html()
-  tabela <- stran %>% html_nodes(xpath="//table[@class='wikitable sortable']") %>%
-    .[[1]] %>% html_table(dec=",")
-  for (i in 1:ncol(tabela)) {
-    if (is.character(tabela[[i]])) {
-      Encoding(tabela[[i]]) <- "UTF-8"
-    }
-  }
-  colnames(tabela) <- c("obcina", "povrsina", "prebivalci", "gostota", "naselja",
-                        "ustanovitev", "pokrajina", "regija", "odcepitev")
-  tabela$obcina <- gsub("Slovenskih", "Slov.", tabela$obcina)
-  tabela$obcina[tabela$obcina == "Kanal ob Soči"] <- "Kanal"
-  tabela$obcina[tabela$obcina == "Loški potok"] <- "Loški Potok"
-  for (col in c("povrsina", "prebivalci", "gostota", "naselja", "ustanovitev")) {
-    if (is.character(tabela[[col]])) {
-      tabela[[col]] <- parse_number(tabela[[col]], na="-", locale=sl)
-    }
-  }
-  for (col in c("obcina", "pokrajina", "regija")) {
-    tabela[[col]] <- factor(tabela[[col]])
-  }
-  return(tabela)
-}
 
-# Funkcija, ki uvozi podatke iz datoteke druzine.csv
-uvozi.druzine <- function(obcine) {
-  data <- read_csv2("podatki/druzine.csv", col_names=c("obcina", 1:4),
-                    locale=locale(encoding="Windows-1250"))
-  data$obcina <- data$obcina %>% strapplyc("^([^/]*)") %>% unlist() %>%
-    strapplyc("([^ ]+)") %>% sapply(paste, collapse=" ") %>% unlist()
-  data$obcina[data$obcina == "Sveti Jurij"] <- iconv("Sveti Jurij ob Ščavnici", to="UTF-8")
-  data <- data %>% pivot_longer(`1`:`4`, names_to="velikost.druzine", values_to="stevilo.druzin")
-  data$velikost.druzine <- parse_number(data$velikost.druzine)
-  data$obcina <- parse_factor(data$obcina, levels=obcine)
-  return(data)
-}
+#Tabela 1: Notranje selitve po regijah
 
-# Zapišimo podatke v razpredelnico obcine
-obcine <- uvozi.obcine()
+selitve_po_regijah <- read.csv("podatki/selitve_po regijah.csv", 
+                               skip = 2, sep =",")
 
-# Zapišimo podatke v razpredelnico druzine.
-druzine <- uvozi.druzine(levels(obcine$obcina))
 
-# Če bi imeli več funkcij za uvoz in nekaterih npr. še ne bi
-# potrebovali v 3. fazi, bi bilo smiselno funkcije dati v svojo
-# datoteko, tukaj pa bi klicali tiste, ki jih potrebujemo v
-# 2. fazi. Seveda bi morali ustrezno datoteko uvoziti v prihodnjih
-# fazah.
+
+#Tabela 2: Notranje selitve po starostnih skupinah
+
+selitve_po_starostnih_skupinah <- read.csv("podatki/selitve_po starostnih skupinah.csv",
+                                           header = TRUE, skip = 2, sep = ",")
+
+selitve_starost <- c("leto","starostna_skupina")
+
+leto <- c("2000","2002","2004","2005","2006","2008","2009","2011",
+          "2012","2013","2014","2015","2016","2017","2018","2019","2020")
+
+starostna_skupina <- c("0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-39","40-49",
+                       "50-54","55-59","60-64","65-69","70-74","75-79","80-84","85+")
+#Tabela 3: Stanovanjske razmere
+
+stanovanjske_razmere <- read.csv("podatki/stanovanjske razmere.csv",
+                                 header = TRUE, skip = 2, sep =",")
+
+#Tabela 4: Stanovanjski stroški
+
+stanovanjski_stroski <- read.csv("podatki/stanovanjski stroski.csv", 
+                                 header = TRUE, skip = 2, sep =",")
+
