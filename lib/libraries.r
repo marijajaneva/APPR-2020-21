@@ -10,16 +10,14 @@ library(tidyverse)
 
 #Tabela 1: Notranje selitve po regijah
 
-selitve_po_regijah <- read.csv("podatki/selitve_po regijah.csv", 
-                               skip = 2, sep =",", locale=locale(encoding = "Windows-1250"))
-
+selitve_po_regijah <- read.csv("podatki/selitve_po_regijah.csv", 
+                               skip = 2, sep =",")
 
 
 #Tabela 2: Notranje selitve po starostnih skupinah
 
-selitve_po_starostnih_skupinah <- read.csv("podatki/selitve_po starostnih skupinah.csv", 
-                                           header = TRUE, skip = 2,
-                                           locale=locale(encoding = "Windows-1250"), sep = ",")
+selitve_po_starostnih_skupinah <- read.csv("podatki/selitve_po_starostnih_skupinah.csv", 
+                                           header = TRUE, skip = 2, sep = ",")
 
 selitve_starost <- c("leto","starostna_skupina")
 
@@ -30,10 +28,11 @@ starostna_skupina <- c("0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-3
                        "50-54","55-59","60-64","65-69","70-74","75-79","80-84","85+")
 #Tabela 3: Stanovanjske razmere
 
-stanovanjske_razmere <- read.csv("podatki/stanovanjske razmere.csv",
+stanovanjske_razmere <- read.csv("podatki/stanovanjske_razmere.csv",
                                  header = TRUE, skip = 2, sep =",")
 
 #Tabela 4: Stanovanjski stroški
 
-stanovanjski_stroski <- read.csv("podatki/stanovanjski stroski.csv", 
+stanovanjski_stroski <- read.csv("podatki/stanovanjski_stroski.csv", 
                                  header = TRUE, skip = 2, sep =",")
+
