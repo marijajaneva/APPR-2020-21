@@ -10,14 +10,15 @@ library(tidyverse)
 #Tabela 1: Notranje selitve po regijah
 
 selitve_po_regijah <- read.csv("podatki/selitve_po regijah.csv", 
-                               skip = 2, sep =",")
+                               skip = 2, sep =",", locale=locale(encoding = "Windows-1250"))
 
 
 
 #Tabela 2: Notranje selitve po starostnih skupinah
 
-selitve_po_starostnih_skupinah <- read.csv("podatki/selitve_po starostnih skupinah.csv",
-                                           header = TRUE, skip = 2, sep = ",")
+selitve_po_starostnih_skupinah <- read_csv2("podatki/selitve_po starostnih skupinah.csv", 
+                                           header = TRUE, skip = 2,
+                                           locale=locale(encoding = "Windows-1250"), sep = ",")
 
 selitve_starost <- c("leto","starostna_skupina")
 
