@@ -29,7 +29,7 @@ starostna_skupina <- c("0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-3
 #Tabela 3: Stanovanjske razmere
 
 stanovanjske_razmere <- read.csv("podatki/stanovanjske_razmere.csv",
-                                 header = TRUE, skip = 2, sep =",")
+                                 header = TRUE, skip = 2, sep = ",")
 
 #Tabela 4: Stanovanjski stroški
 
