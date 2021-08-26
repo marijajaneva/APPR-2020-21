@@ -1,6 +1,17 @@
 # 3. faza: Vizualizacija podatkov
 
-graf_po_starostnih_skupinah <- ggplot(selitve_po_starostnih_skupinah %>% filter(starostna_skupina == "20-22 let")) + aes(x=starostna_skupina, y=leto, group=stevilo_selitev)+ geom_point() + geom_line() + theme(panel.grid.major.y =element_line(color="red"))
+#Graf 
+graf_selitve_po_regijah <- ggplot(selitve_po_regijah %>% filter(leto == "2000")) + aes(x = REGIJA.ODSELITVE, y = value, group=leto)
+                                  
+
+print(graf_selitve_po_regijah)
+
+
+#Graf po starostnih skupinah
+
+graf_po_starostnih_skupinah <- ggplot(selitve_po_starostnih_skupinah, aes(starostna_skupina, stevilo_selitev, leto == 2000))+ geom_point()
+
 
 print(graf_po_starostnih_skupinah)
+
 
