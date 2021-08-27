@@ -19,25 +19,27 @@ selitve_po_regijah <- selitve_po_regijah%>%
                names_to = c('leto', 'regija_priselitve'), 
                names_sep = "\\.v\\.")
 
+colnames(selitve_po_regijah) <- c("regija_odselitve", "leto", "regija_priselitve", "stevilo_preseljencev")
+
 index <- is.na(selitve_po_regijah)
 selitve_po_regijah[index] <- 0
 
 selitve_po_regijah$leto <- str_replace(selitve_po_regijah$leto, "X", " ")
 
-selitve_po_regijah$REGIJA.ODSELITVE <- str_replace(selitve_po_regijah$REGIJA.ODSELITVE, "iz", " ")
+selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "iz", " ")
 
-selitve_po_regijah$REGIJA.ODSELITVE <- str_replace(selitve_po_regijah$REGIJA.ODSELITVE, "Pomurske", "Pomurska")
-selitve_po_regijah$REGIJA.ODSELITVE <- str_replace(selitve_po_regijah$REGIJA.ODSELITVE, "Podravske", "Podravska")
-selitve_po_regijah$REGIJA.ODSELITVE <- str_replace(selitve_po_regijah$REGIJA.ODSELITVE, "Koroške", "Koroška")
-selitve_po_regijah$REGIJA.ODSELITVE <- str_replace(selitve_po_regijah$REGIJA.ODSELITVE, "Savinjske", "Savinjska")
-selitve_po_regijah$REGIJA.ODSELITVE <- str_replace(selitve_po_regijah$REGIJA.ODSELITVE, "Zasavske", "Zasavska")
-selitve_po_regijah$REGIJA.ODSELITVE <- str_replace(selitve_po_regijah$REGIJA.ODSELITVE, "Posavske", "Posavska")
-selitve_po_regijah$REGIJA.ODSELITVE <- str_replace(selitve_po_regijah$REGIJA.ODSELITVE, "Jugovzhodne Slovenije", "Jugovzhodna Slovenija")
-selitve_po_regijah$REGIJA.ODSELITVE <- str_replace(selitve_po_regijah$REGIJA.ODSELITVE, "Osrednjeslovenske", "Osrednjeslovenska")
-selitve_po_regijah$REGIJA.ODSELITVE <- str_replace(selitve_po_regijah$REGIJA.ODSELITVE, "Gorenjske", "Gorenjska")
-selitve_po_regijah$REGIJA.ODSELITVE <- str_replace(selitve_po_regijah$REGIJA.ODSELITVE, "Primorsko-notranjske", "Primorsko-notranjska")
-selitve_po_regijah$REGIJA.ODSELITVE <- str_replace(selitve_po_regijah$REGIJA.ODSELITVE, "Goriške", "Goriška")
-selitve_po_regijah$REGIJA.ODSELITVE <- str_replace(selitve_po_regijah$REGIJA.ODSELITVE, "Obalno-kraške", "Obalno-kraška")
+selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "Pomurske", "Pomurska")
+selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "Podravske", "Podravska")
+selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "Koroške", "Koroška")
+selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "Savinjske", "Savinjska")
+selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "Zasavske", "Zasavska")
+selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "Posavske", "Posavska")
+selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "Jugovzhodne Slovenije", "Jugovzhodna Slovenija")
+selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "Osrednjeslovenske", "Osrednjeslovenska")
+selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "Gorenjske", "Gorenjska")
+selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "Primorsko-notranjske", "Primorsko-notranjska")
+selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "Goriške", "Goriška")
+selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "Obalno-kraške", "Obalno-kraška")
 
 selitve_po_regijah$regija_priselitve <- str_replace(selitve_po_regijah$regija_priselitve, "Pomursko", "Pomurska")
 selitve_po_regijah$regija_priselitve <- str_replace(selitve_po_regijah$regija_priselitve, "Podravsko", "Podravska")
@@ -75,6 +77,8 @@ stanovanjske_razmere <- stanovanjske_razmere%>%
                names_to = c('leto', 'kakovost_stanovanja'), 
                names_sep = "\\.v\\.")
 
+colnames(stanovanjske_razmere) <- c("regija", "leto", "kakovost_stanovanja", "stevilo_stanovanj")
+
 stanovanjske_razmere <- separate(stanovanjske_razmere, col = leto, into = c("leto", "kakovost_stanovanja"))
 
 stanovanjske_razmere$leto <- str_replace(stanovanjske_razmere$leto, "X", " ")
@@ -95,6 +99,8 @@ stanovanjski_stroski <- stanovanjski_stroski%>%
   pivot_longer(cols = -1, 
                names_to = c('leto', 'breme_stroskov'), 
                names_sep = "\\.v\\.")
+
+colnames(stanovanjski_stroski) <- c("regija", "leto", "breme_stroskov", "stevilo_gospodinjstev")
 
 stanovanjski_stroski <- separate(stanovanjski_stroski, col = leto, into = c("leto", "breme_stroskov"))
 
