@@ -101,3 +101,4 @@ stanovanjski_stroski <- separate(stanovanjski_stroski, col = leto, into = c("let
 stanovanjski_stroski$leto <- str_replace(stanovanjski_stroski$leto, "X", " ")
 
 stanovanjski_stroski$breme_stroskov <- str_replace(stanovanjski_stroski$breme_stroskov, "Niso", "Nizko")
+
