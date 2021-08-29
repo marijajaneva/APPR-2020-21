@@ -11,6 +11,7 @@ graf_izseljencev <- ggplot(izseljeni, aes(leto, izseljeni_sum)) +
   labs(title = "Graf notranjih selitev")+
   xlab("Leto") +
   ylab("število izseljencev")
+
                                
 print(graf_izseljencev)
 
@@ -18,6 +19,11 @@ izseljeni <- selitve_po_regijah %>% group_by(regija_odselitve, leto) %>%
   
   summarize(izseljeni_sum = sum(stevilo_preseljencev))
 
+leto2020 <- izseljeni[izseljeni$leto == "2020" , c(1,3)]
+
+graf_iseljencev2020 <- ggplot(leto2020, aes(regija_odselitve, izseljeni_sum)) +geom_col()
+
+print(graf_iseljencev2020)
 
 priseljeni <- selitve_po_regijah %>% group_by(regija_priselitve, leto) %>%
   
@@ -73,6 +79,9 @@ graf_starost2020 <- ggplot(leto2020, aes(starostna_skupina, starost_sum)) +
   xlab("Starostna skupina")+
   ylab("Število selitev")
 
+
+
+
 print(graf_starost2020)
 
 
@@ -126,8 +135,9 @@ graf_veliko_breme <- ggplot(veliko_breme, aes(regija, stroski_sum))+
   xlab("Leto")+
   ylab("Število gospodinjstev")
 
-  
 print(graf_veliko_breme)
 
+#Zemljevid
 
-
+zemljevid <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/SVN_adm_shp.zip",
+                             "SVN_adm1", encoding = "UTF-8")
