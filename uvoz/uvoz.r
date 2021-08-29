@@ -24,7 +24,7 @@ colnames(selitve_po_regijah) <- c("regija_odselitve", "leto", "regija_priselitve
 index <- is.na(selitve_po_regijah)
 selitve_po_regijah[index] <- 0
 
-selitve_po_regijah$leto <- str_replace(selitve_po_regijah$leto, "X", " ")
+selitve_po_regijah$leto <- str_replace(selitve_po_regijah$leto, "X", "")
 
 selitve_po_regijah$regija_odselitve <- str_replace(selitve_po_regijah$regija_odselitve, "iz", " ")
 
@@ -81,7 +81,7 @@ colnames(stanovanjske_razmere) <- c("regija", "leto", "kakovost_stanovanja", "st
 
 stanovanjske_razmere <- separate(stanovanjske_razmere, col = leto, into = c("leto", "kakovost_stanovanja"))
 
-stanovanjske_razmere$leto <- str_replace(stanovanjske_razmere$leto, "X", " ")
+stanovanjske_razmere$leto <- str_replace(stanovanjske_razmere$leto, "X", "")
 
 stanovanjske_razmere$kakovost_stanovanja <- str_replace(stanovanjske_razmere$kakovost_stanovanja, "Slabo", "Slabo stanje stanovanja")
 stanovanjske_razmere$kakovost_stanovanja <- str_replace(stanovanjske_razmere$kakovost_stanovanja, "Ni", "Ni primernega ogrevanja")
@@ -104,7 +104,7 @@ colnames(stanovanjski_stroski) <- c("regija", "leto", "breme_stroskov", "stevilo
 
 stanovanjski_stroski <- separate(stanovanjski_stroski, col = leto, into = c("leto", "breme_stroskov"))
 
-stanovanjski_stroski$leto <- str_replace(stanovanjski_stroski$leto, "X", " ")
+stanovanjski_stroski$leto <- str_replace(stanovanjski_stroski$leto, "X", "")
 
 stanovanjski_stroski$breme_stroskov <- str_replace(stanovanjski_stroski$breme_stroskov, "Niso", "Nizko")
 
