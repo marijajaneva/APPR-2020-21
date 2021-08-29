@@ -43,12 +43,12 @@ Uvoziila sem podatke v obliki CSV s statističnega urada: https://pxweb.stat.si/
   - `regija odselitve` - spremenljivka: ime regije iz katere so se prebivalci izselili((besedilo),
   - `regija priselitve` - spremenljivka: ime regije, v katero so se prebivalci preselili(besedilo),
   - `leto` - spremenljivka: katerega leta so se prebivalci preselili iz ene regije v drugo(število),
-  - `stevilo oseb` - meritev: število oseb, ki se je preselilo oz ene regije v drugo(število)
+  - `stevilo preseljencev` - meritev: število oseb, ki se je preselilo oz ene regije v drugo(število)
   
  2. [Notranje selitve po starostnih skupinah](https://pxweb.stat.si/SiStatData/pxweb/sl/Data/Data/05N2002S.px/table/tableViewLayout2/) 
   - `starostna skupina` - spremenljivka: starostna skupina, pri kateri se je prebivalstvo preselilo,
   - `leto` - spremenljivka - v katerem leto so se prebivalci preselili,
-  - `število oseb` - meritev: število oseb, ki se je preselilo, v danem letu pri določeni starostni skupini.
+  - `število selitev` - meritev: število oseb, ki se je preselilo, v danem letu pri določeni starostni skupini.
   
  3. [Stanovanjske razmere](https://pxweb.stat.si/SiStatData/pxweb/sl/Data/Data/0867725S.px/table/tableViewLayout2/)
   - `leto` - spremenljivka: kakšne stanovanjske razmere so bile v danem letu ,
@@ -70,51 +70,83 @@ Uvoziila sem podatke v obliki CSV s statističnega urada: https://pxweb.stat.si/
   - `število gospodinjstev` - meritev: število gospodinjstev, ki jim stanovanjski stroški predstavljajo veliko, srednje veliko ali nizko breme (število)
 
 
-
-
-
-
-
-
-
-
-
-Spodnji graf prikazuje porazdelitev števila naselij v občinah.
-
-```{r histogram, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-ggplot(obcine, aes(x=naselja)) + geom_histogram() +
-  ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin")
-```
-
-***
-
 # Analiza in vizualizacija podatkov
 
 ```{r vizualizacija, results='hide'}
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
+```{r graf_izseljencev, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
 
-Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
+graf_izseljencev + xlab("Leto") + ylab("Število izseljencev") + ggtitle ("Graf notranjih selitev")
 
-```{r zemljevid, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
-tm_shape(merge(zemljevid, povprecja, by.x="OB_UIME", by.y="obcina")) +
-  tm_polygons("povprecje", title="Povprečje") +
-  tm_layout(title="Povprečno število otrok v družini")
 ```
 
-***
+Iz grafa lahko vidimo, da se je največ prebivalstva odselilo iz Osrednjeslovenske regije, najmanj pa iz Zasavke. 
+Vidimo tudi, da se je leta 2008 število prebivalcev, ki so se odselili iz določene regije zelo povečalo v primerjavi z letom 2007. 
+Opazimo tudi, da se je skoraj vsako leto število selitev povečevalo. 
+Leta 2008 se je največ prebivalstva iz Osrednjeslovenske regije preselilo v Jugovzhodno Slovenijo. 
+
+Opazimo tudi, da je bilo leta 2020 največ selitev v primerjavi s prejšnjimi leti. 
+
+
+```{r graf_priseljencev, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+graf_priseljencev + xlab("Leto") + ylab("Število izseljencev") + ggtitle ("Graf notranjih selitev")
+
+```
+Iz grafa opazimo, da se je največ prebivalstva preselilo v Osrednjeslovensko regijo.
+V Osrednjoslovensko regijo leta 2008 se je največ prebivalstva preselilo iz Jugovzhodno Slovenijo. Kar pa je zelo zanimo za leto 2008, da se je največ prebivalstva preselilo iz Osrednjeslovenske v Jugovzhodno Slovenijo in tudi obratno. 
+
+Leta 2020 pa se je v Osrednjeslovensko regijo preselilo največ prebivalstva iz Gorenjske regije. 
+
+
+
+```{r graf_starost2000, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+graf_starost2000 + xlab("Starostna skupina") + ylab("Število selitev") + ggtitle ("Selitve po starostnih skupinah leta 2000")
+
+```
+```{r graf_starost2007, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+graf_starost2007 + xlab("Starostna skupina") + ylab("Število selitev") + ggtitle ("Selitve po starostnih skupinah leta 2007")
+
+```
+```{r graf_starost2008, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+graf_starost2008 + xlab("Starostna skupina") + ylab("Število selitev") + ggtitle ("Selitve po starostnih skupinah leta 2008")
+
+```
+```{r graf_starost2020, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+graf_starost2020 + xlab("Starostna skupina") + ylab("Število selitev") + ggtitle ("Selitve po starostnih skupinah leta 2020")
+
+```
+Iz danih grafov lahko vidimo, da je največ selitev med mladimi oziroma med starostnimi skupinami 20-24, 25-29 in 30-35 let. Opazimo tudi, da se je od leta 2000 do leta 2020 povečevalo tudi število selitev starejših oseb od 70 let navzgor. 
+
+```{r graf_stanovanjskih_razmer, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+graf_stanovanjskih_razmer + xlab("Regija") + ylab("Število stanovanj") + ggtitle ("Kakovost stanovanja po regijah")
+
+```
+Iz grafa vidimo, da je največji problem slabo stanje stanovanja. To pomeni, da ima večina prebivalcev težave s streho, ki pušča, z vlažnimi stenami ipd. 
+Najmanj težav imajo prebivalci z nepimernem ogrevanju. 
+
+```{r graf_nizko_breme, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+graf_nizko_breme + xlab("Leto") + ylab("Število gospodinjstev") + ggtitle ("Število gospodinjstev, katerim stroški stanovanja predstavljajo nizko breme")
+
+```
+```{r graf_srednje_breme, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+graf_srednje_breme + xlab("Leto") + ylab("Število gospodinjstev") + ggtitle ("Število gospodinjstev, katerim stroški stanovanja predstavljajo srednje breme")
+
+```
+
+
+```{r graf_visoko_breme, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+graf_nizko_breme + xlab("Leto") + ylab("Število gospodinjstev") + ggtitle ("Število gospodinjstev, katerim stroški stanovanja predstavljajo visoko breme")
+
+```
 
 # Napredna analiza podatkov
-
-```{r analiza}
-source("analiza/analiza.r", encoding="UTF-8")
-```
-
-Spodnji graf prikazuje povezavo med številom naselij in površino občine.
-
-
-***
-
-```{r shiny}
-shinyAppDir("shiny", options=list(width="100%", height=600))
-```
