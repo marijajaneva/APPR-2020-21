@@ -1,11 +1,6 @@
 # 4. faza: Analiza podatkov
 
-podatki <- obcine %>% transmute(obcina, povrsina, gostota,
-                                gostota.naselij=naselja/povrsina) %>%
-  left_join(povprecja, by="obcina")
-row.names(podatki) <- podatki$obcina
-podatki$obcina <- NULL
+zemljevid <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/SVN_adm_shp.zip",
+                             "SVN_adm1", encoding = "UTF-8") %>% pretvori.zemljevid()%>%
 
-# Število skupin
-n <- 5
-skupine <- hclust(dist(scale(podatki))) %>% cutree(n)
+
