@@ -41,12 +41,6 @@ graf_priseljencev <- ggplot(priseljeni, aes(leto, priseljeni_sum)) +
 
 #Graf po starostnih skupinah
 
-#graf_starostna_skupina <- ggplot(data = selitve_po_starostnih_skupinah, aes(x=starostna_skupina,y=stevilo_selitev, color = leto)) + 
-#  geom_point() + facet_grid(~leto)
-
-#(graf_starostna_skupina)
-
-
 starost <- selitve_po_starostnih_skupinah %>% group_by(starostna_skupina, leto) %>%
   
   summarize(starost_sum = sum(stevilo_selitev))
@@ -81,6 +75,12 @@ graf_starost2020 <- ggplot(leto2020, aes(starostna_skupina, starost_sum)) +
   geom_col() + labs(title = "Selitve po starostnih skupinah leta 2020")+
   xlab("Starostna skupina")+
   ylab("Število selitev")
+
+#graf_starost <- ggplot(data = selitve_po_starostnih_skupinah, aes(x=starostna_skupina,y=stevilo_selitev, color = leto)) +
+#  geom_col(data = selitve_po_starostnih_skupinah, aes(x = starostna_skupina, y = stevilo_selitev)) +
+#  facet_grid(leto2000 ~ leto2020)
+
+#print(graf_starost)
 
 #Graf stanovanjskih razmer
 

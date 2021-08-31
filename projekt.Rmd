@@ -139,6 +139,9 @@ Najmanj težav imajo prebivalci z nepimernem ogrevanju.
 graf_stroski + xlab("Leto") + ylab("Število gospodinjstev") + ggtitle("Kakšno breme prebivalcem predstavljajo stanovanjski stroški po letih")
 
 ```
+Iz grafa vidimo, da stanovanjski stroški predtavljajo večinoma srednje breme prebivalcem.Velika razlika je tudi med številom prebivalcev, katerim stroški predstavljajo nizko in katerim stroški predstavljajo veliko breme. Opazimo lahko, da so prebivalci katerim stroški predstavljajo nizko breme v manjšini, kar pomeni, da je vedno več prebivalcev, katerim stanovanjski stroški predstavljajo srednje ali veliko breme. 
+
+
 # Napredna analiza podatkov
 
 ```{r graf , echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
