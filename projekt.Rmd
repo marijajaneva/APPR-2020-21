@@ -24,7 +24,10 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Izbira teme
 
-V svoji projektni nalogi bom analizirala selitve po regijah v Sloveniji od leta 2000 do leta 2020. Ugotovila bom kakšni so razlogi za selitev iz ene regije v drugo in pri katerih letih se največ prebivalstva odloči za selitev. Pogledala bom tudi kolikšna je stopnja prenaseljenosti stanovanj po regijah. Potem bom analizirala še kakšne so stanovanjske razmere, kolikšno breme predstavljajo stanovanjski stroški in ali so to eni izmed razlogov za selitev.
+V svoji projektni nalogi bom analizirala selitve po regijah v Sloveniji od leta 2000 do leta 2020. Ugotovila bom iz katere regije se odseli največ prebivalstva in v katero regijo se preselijo. 
+Primerjala bom preselitve tudi med leti in ali se stopnja preseljevanja povečuje z leti ali ne.
+Pogledala bom tudi, kakšne so stanovanjske razmere med regijami, ali so to tudi razlogi za selitev. Na koncu bom analizirala še stanovanjske stroške in kakšno breme predstavljajo prebivalcem po regijah, ali se breme stanovanjskih stroškov razlikuje po regijah.
+
 
 ![](slike/grb.png)
 
@@ -142,11 +145,11 @@ graf_srednje_breme + xlab("Leto") + ylab("Število gospodinjstev") + ggtitle ("�
 
 ```
 
+```{r graf_veliko_breme, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
 
-```{r graf_visoko_breme, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
-
-graf_nizko_breme + xlab("Leto") + ylab("Število gospodinjstev") + ggtitle ("Število gospodinjstev, katerim stroški stanovanja predstavljajo visoko breme")
+graf_veliko_breme + xlab("Leto") + ylab("Število gospodinjstev") + ggtitle ("Število gospodinjstev, katerim stroški stanovanja predstavljajo veliko breme")
 
 ```
+
 
 # Napredna analiza podatkov

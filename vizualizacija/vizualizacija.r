@@ -12,7 +12,7 @@ graf_izseljencev <- ggplot(izseljeni, aes(leto, izseljeni_sum)) +
   xlab("Leto") +
   ylab("število izseljencev")
 
-                               
+
 print(graf_izseljencev)
 
 izseljeni <- selitve_po_regijah %>% group_by(regija_odselitve, leto) %>%
@@ -79,9 +79,6 @@ graf_starost2020 <- ggplot(leto2020, aes(starostna_skupina, starost_sum)) +
   xlab("Starostna skupina")+
   ylab("Število selitev")
 
-
-
-
 print(graf_starost2020)
 
 
@@ -117,7 +114,6 @@ graf_nizko_breme <-ggplot(nizko_breme, aes(regija, stroski_sum))+
 
 print(graf_nizko_breme)
 
-
 srednje_breme <- stroski[stroski$breme_stroskov == "Srednje", c(1:3)]
 
 graf_srednje_breme <- ggplot(srednje_breme, aes(regija, stroski_sum))+
@@ -131,7 +127,8 @@ print(graf_srednje_breme)
 veliko_breme <- stroski[stroski$breme_stroskov == "Veliko", c(1:3)]
 
 graf_veliko_breme <- ggplot(veliko_breme, aes(regija, stroski_sum))+
-  geom_col() + labs(title = "Število gospodinjstev, katerim stroški stanovanja predstavljajo veliko breme") +
+  geom_col() + 
+  labs(title = "Število gospodinjstev, katerim stroški stanovanja predstavljajo veliko breme")+
   xlab("Leto")+
   ylab("Število gospodinjstev")
 
@@ -141,3 +138,4 @@ print(graf_veliko_breme)
 
 zemljevid <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/SVN_adm_shp.zip",
                              "SVN_adm1", encoding = "UTF-8")
+

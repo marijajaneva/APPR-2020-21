@@ -2,8 +2,8 @@
 
 Repozitorij z gradivi pri predmetu APPR v študijskem letu 2020/21
 
-* [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2020-21/master?urlpath=shiny/APPR-2020-21/projekt.Rmd) Shiny
-* [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2020-21/master?urlpath=rstudio) RStudio
+*[![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/marijajaneva/APPR-2020-21/master?urlpath=shiny/APPR-2020-21/projekt.Rmd) Shiny
+*[![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/marijajaneva/APPR-2020-21/master?urlpath=rstudio) RStudio
 
 ## Analiza notranjih selitev in stanovanjskih razmer v Sloveniji
 
@@ -81,3 +81,6 @@ v datoteki `gitconfig` nastavite svoje ime in priimek ter e-poštni naslov
 ob naslednjem zagonu bo mogoče delati commite.
 Te podatke lahko nastavite tudi z `git config --global` v konzoli
 (vendar bodo veljale le v trenutni seji).
+
+
+
