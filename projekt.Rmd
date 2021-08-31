@@ -134,22 +134,15 @@ graf_stanovanjskih_razmer + xlab("Regija") + ylab("Število stanovanj") + ggtitl
 Iz grafa vidimo, da je največji problem slabo stanje stanovanja. To pomeni, da ima večina prebivalcev težave s streho, ki pušča, z vlažnimi stenami ipd. 
 Najmanj težav imajo prebivalci z nepimernem ogrevanju. 
 
-```{r graf_nizko_breme, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
 
-graf_nizko_breme + xlab("Leto") + ylab("Število gospodinjstev") + ggtitle ("Število gospodinjstev, katerim stroški stanovanja predstavljajo nizko breme")
+```{r graf_stroski, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
 
-```
-```{r graf_srednje_breme, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
-
-graf_srednje_breme + xlab("Leto") + ylab("Število gospodinjstev") + ggtitle ("Število gospodinjstev, katerim stroški stanovanja predstavljajo srednje breme")
+graf_stroski + xlab("Leto") + ylab("Število gospodinjstev") + ggtitle("Kakšno breme prebivalcem predstavljajo stanovanjski stroški po letih")
 
 ```
-
-```{r graf_veliko_breme, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
-
-graf_veliko_breme + xlab("Leto") + ylab("Število gospodinjstev") + ggtitle ("Število gospodinjstev, katerim stroški stanovanja predstavljajo veliko breme")
-
-```
-
-
 # Napredna analiza podatkov
+
+
+zemljevid <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/SVN_adm_shp.zip",
+                             "SVN_adm1", encoding = "UTF-8")
+                             
