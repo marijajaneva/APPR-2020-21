@@ -2,13 +2,20 @@
 
 #LINEARNA REGRESIJA
 
-#Linearen model med stanovanjskimi razmerami in regije izselitve
-fit <- lm(stevilo_stanovanj ~ kakovost_stanovanja , data=stanovanjske_razmere)
-summary(fit)
-graf <- ggplot(stanovanjske_razmere, aes(x = kakovost_stanovanja  , y = stanovanjske_razmere$stevilo_stanovanj)) + 
-  geom_point() + 
-  geom_smooth(method=lm, se=FALSE) + labs(x = "Kakovost stanovanja", y = "Število stanovanj v slabem stanju", fill = NULL)
+#Linearen model za skupno število stanovanj v odvisnosti od leta
+
+podatki <- stanovanjske_razmere %>% group_by(leto)  %>% 
+  summarize(stanovanja_skupno = sum(stevilo_stanovanj))
+podatki$leto <- as.numeric(podatki$leto)
+fit <- lm(stanovanja_skupno ~ leto , data=podatki)
+
+
+graf <- ggplot(podatki, aes(x = leto, y = stanovanja_skupno)) + 
+  geom_point() + geom_smooth(method=lm, se=FALSE) + 
+  labs(x = "Leto" , y = "SKupno število stanovanj" , title = "Ponazoritev premice linearne regresije - \n skupno število stanovanj v odvisnosti od leta")
 
 
 print(graf)
+
+
 

@@ -13,9 +13,6 @@ graf_izseljencev <- ggplot(izseljeni, aes(leto, izseljeni_sum)) +
   xlab("Leto")
   ylab("število izseljencev")
 
-
-print(graf_izseljencev)
-
 izseljeni <- selitve_po_regijah %>% group_by(regija_odselitve, leto) %>%
   
   summarize(izseljeni_sum = sum(stevilo_preseljencev))
@@ -30,8 +27,6 @@ graf_iseljencev2020 <- ggplot(leto2020, aes(regija_odselitve, izseljeni_sum)) +
   ylab("Število izseljencev")
   
 
-print(graf_iseljencev2020)
-
 priseljeni <- selitve_po_regijah %>% group_by(regija_priselitve, leto) %>%
   
   summarize(priseljeni_sum = sum(stevilo_preseljencev))
@@ -43,8 +38,6 @@ graf_priseljencev <- ggplot(priseljeni, aes(leto, priseljeni_sum)) +
   labs(title = "Graf notranjih selitev")+
   xlab("Leto")+
   ylab("Število priseljencev")
-
-print(graf_priseljencev)
 
 #Graf po starostnih skupinah
 
@@ -65,7 +58,6 @@ graf_starost2000 <- ggplot(leto2000, aes(starostna_skupina, starost_sum)) +
   xlab("Starostna skupina")+
   ylab("Število selitev") 
   
-print(graf_starost2000)
 
 leto2007 <- starost[starost$leto == "2007", c(1:3)]
 
@@ -75,16 +67,12 @@ graf_starost2007 <- ggplot(leto2007, aes(starostna_skupina, starost_sum)) +
   ylab("Število selitev")
   
 
-print(graf_starost2007)
-
 leto2008 <- starost[starost$leto == "2008", c(1:3)]
 
 graf_starost2008 <- ggplot(leto2008, aes(starostna_skupina, starost_sum)) +
   geom_col(color = "blue") + labs(title = "Selitve po starostnih skupinah leta 2008")+
   xlab("Starostna skupina")+
   ylab("Število selitev")
-
-print(graf_starost2008)
 
 
 leto2020 <- starost[starost$leto == "2020", c(1:3)]
@@ -93,8 +81,6 @@ graf_starost2020 <- ggplot(leto2020, aes(starostna_skupina, starost_sum)) +
   geom_col() + labs(title = "Selitve po starostnih skupinah leta 2020")+
   xlab("Starostna skupina")+
   ylab("Število selitev")
-
-print(graf_starost2020)
 
 #Graf stanovanjskih razmer
 
@@ -111,9 +97,6 @@ graf_stanovanjskih_razmer <- ggplot(razmere, aes(regija, razmere_sum)) +
   ylab("Število stanovanj")
 
 
-print(graf_stanovanjskih_razmer)
-
-
 #Graf stanovanjskih stroškov
 
 graf_stroski <- ggplot(stanovanjski_stroski, aes(x=leto,y=stevilo_gospodinjstev, fill=breme_stroskov))+
@@ -123,11 +106,26 @@ graf_stroski <- ggplot(stanovanjski_stroski, aes(x=leto,y=stevilo_gospodinjstev,
   xlab("Leto")+
   ylab("Število gospodinjstev")
 
-print(graf_stroski)
 
 #Zemljevid
 
 zemljevid <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/SVN_adm_shp.zip",
-                             "SVN_adm1", encoding = "UTF-8")
+                                                       "SVN_adm1", encoding = "UTF-8")
 
-print(zemljevid)
+
+#LINEARNA REGRESIJA
+
+#Linearen model za skupno število stanovanj v odvisnosti od leta
+
+podatki <- stanovanjske_razmere %>% group_by(leto)  %>% 
+  summarize(stanovanja_skupno = sum(stevilo_stanovanj))
+podatki$leto <- as.numeric(podatki$leto)
+fit <- lm(stanovanja_skupno ~ leto , data=podatki)
+
+
+graf <- ggplot(podatki, aes(x = leto, y = stanovanja_skupno)) + 
+  geom_point() + geom_smooth(method=lm, se=FALSE) + 
+  labs(x = "Leto" , y = "SKupno število stanovanj" , title = "Ponazoritev premice linearne regresije - \n skupno število stanovanj v odvisnosti od leta")
+
+
+

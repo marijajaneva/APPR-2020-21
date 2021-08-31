@@ -79,7 +79,6 @@ Uvoziila sem podatke v obliki CSV s statističnega urada: https://pxweb.stat.si/
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 ```{r graf_izseljencev, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
-
 graf_izseljencev + xlab("Leto") + ylab("Število izseljencev") + ggtitle ("Graf notranjih selitev")
 
 ```
@@ -141,6 +140,12 @@ graf_stroski + xlab("Leto") + ylab("Število gospodinjstev") + ggtitle("Kakšno 
 
 ```
 # Napredna analiza podatkov
+
+```{r graf , echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+graf + xlab("Leto") + ylab("Skupno število stanovanj") + ggtitle("Ponazoritev premice linearne regresije - \n skupno število stanovanj v odvisnosti od leta")
+
+```
 
 
 zemljevid <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/SVN_adm_shp.zip",
