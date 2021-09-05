@@ -93,7 +93,7 @@ Opazimo tudi, da je bilo leta 2020 največ selitev v primerjavi s prejšnjimi le
 
 ```{r graf_priseljencev, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
 
-graf_priseljencev + xlab("Leto") + ylab("Število izseljencev") + ggtitle ("Graf notranjih selitev")
+graf_priseljencev + xlab("Leto") + ylab("Število priseljencev") + ggtitle ("Graf notranjih selitev")
 
 ```
 Iz grafa opazimo, da se je največ prebivalstva preselilo v Osrednjeslovensko regijo.
@@ -103,26 +103,10 @@ Leta 2020 pa se je v Osrednjeslovensko regijo preselilo največ prebivalstva iz 
 
 
 
-```{r graf_starost2000, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
-
-graf_starost2000 + xlab("Starostna skupina") + ylab("Število selitev") + ggtitle ("Selitve po starostnih skupinah leta 2000")
-
+```{r echo=FALSE, message=FALSE, warning=TRUE, fig.align='center'}
+grid.arrange(graf_starost2000, graf_starost2020,graf_starost2007, graf_starost2008, nrow = 2)
 ```
-```{r graf_starost2007, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
 
-graf_starost2007 + xlab("Starostna skupina") + ylab("Število selitev") + ggtitle ("Selitve po starostnih skupinah leta 2007")
-
-```
-```{r graf_starost2008, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
-
-graf_starost2008 + xlab("Starostna skupina") + ylab("Število selitev") + ggtitle ("Selitve po starostnih skupinah leta 2008")
-
-```
-```{r graf_starost2020, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
-
-graf_starost2020 + xlab("Starostna skupina") + ylab("Število selitev") + ggtitle ("Selitve po starostnih skupinah leta 2020")
-
-```
 Iz danih grafov lahko vidimo, da je največ selitev med mladimi oziroma med starostnimi skupinami 20-24, 25-29 in 30-35 let. Opazimo tudi, da se je od leta 2000 do leta 2020 povečevalo tudi število selitev starejših oseb od 70 let navzgor. 
 
 ```{r graf_stanovanjskih_razmer, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
@@ -136,7 +120,8 @@ Najmanj težav imajo prebivalci z nepimernem ogrevanju.
 
 ```{r graf_stroski, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
 
-graf_stroski + xlab("Leto") + ylab("Število gospodinjstev") + ggtitle("Kakšno breme prebivalcem predstavljajo stanovanjski stroški po letih")
+graf_stroski + xlab("Leto") + ylab("Število gospodinjstev") +
+  scale_color_discrete("Breme stroškov") + ggtitle("Kakšno breme prebivalcem predstavljajo stanovanjski stroški po letih")
 
 ```
 Iz grafa vidimo, da stanovanjski stroški predtavljajo večinoma srednje breme prebivalcem.Velika razlika je tudi med številom prebivalcev, katerim stroški predstavljajo nizko in katerim stroški predstavljajo veliko breme. Opazimo lahko, da so prebivalci katerim stroški predstavljajo nizko breme v manjšini, kar pomeni, da je vedno več prebivalcev, katerim stanovanjski stroški predstavljajo srednje ali veliko breme. 
@@ -144,13 +129,10 @@ Iz grafa vidimo, da stanovanjski stroški predtavljajo večinoma srednje breme p
 
 # Napredna analiza podatkov
 
-```{r graf , echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
-
-graf + xlab("Leto") + ylab("Skupno število stanovanj") + ggtitle("Ponazoritev premice linearne regresije - \n skupno število stanovanj v odvisnosti od leta")
-
+```{r analiza, echo=FALSE, message=FALSE, warning=FALSE}
+source("analiza/analiza.r", encoding="UTF-8")
 ```
 
 
-zemljevid <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/SVN_adm_shp.zip",
-                             "SVN_adm1", encoding = "UTF-8")
+
                              

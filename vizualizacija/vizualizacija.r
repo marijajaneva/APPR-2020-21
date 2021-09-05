@@ -48,23 +48,28 @@ starost <- selitve_po_starostnih_skupinah %>% group_by(starostna_skupina, leto) 
 leto2000 <- starost[starost$leto == "2000", c(1:3)]
 
 graf_starost2000 <- ggplot(leto2000, aes(starostna_skupina, starost_sum)) +
-  geom_col() + labs(title = "Selitve po starostnih skupinah leta 2000")+
+  geom_col(fill = "green") + 
+  theme(axis.text.x = element_text(angle = 90))+
+  labs(title = "Selitve po starosti leta 2000")+
   xlab("Starostna skupina")+
   ylab("Število selitev") 
-  
 
 leto2007 <- starost[starost$leto == "2007", c(1:3)]
 
 graf_starost2007 <- ggplot(leto2007, aes(starostna_skupina, starost_sum)) +
-  geom_col(color = "red") + labs(title = "Selitve po starostnih skupinah leta 2007") +
+  geom_col(fill = "red") +
+  theme(axis.text.x = element_text(angle = 90))+
+  labs(title = "Selitve po starosti leta 2007") +
   xlab("Starostna skupina")+
   ylab("Število selitev")
-  
+
 
 leto2008 <- starost[starost$leto == "2008", c(1:3)]
 
 graf_starost2008 <- ggplot(leto2008, aes(starostna_skupina, starost_sum)) +
-  geom_col(color = "blue") + labs(title = "Selitve po starostnih skupinah leta 2008")+
+  geom_col(fill = "blue") +
+  theme(axis.text.x = element_text(angle = 90))+
+  labs(title = "Selitve po starosti leta 2008")+
   xlab("Starostna skupina")+
   ylab("Število selitev")
 
@@ -72,15 +77,13 @@ graf_starost2008 <- ggplot(leto2008, aes(starostna_skupina, starost_sum)) +
 leto2020 <- starost[starost$leto == "2020", c(1:3)]
 
 graf_starost2020 <- ggplot(leto2020, aes(starostna_skupina, starost_sum)) +
-  geom_col() + labs(title = "Selitve po starostnih skupinah leta 2020")+
+  geom_col(fill = "yellow") + 
+  theme(axis.text.x = element_text(angle = 90))+
+  labs(title = "Selitve po starosti leta 2020")+
   xlab("Starostna skupina")+
   ylab("Število selitev")
 
-#graf_starost <- ggplot(data = selitve_po_starostnih_skupinah, aes(x=starostna_skupina,y=stevilo_selitev, color = leto)) +
-#  geom_col(data = selitve_po_starostnih_skupinah, aes(x = starostna_skupina, y = stevilo_selitev)) +
-#  facet_grid(leto2000 ~ leto2020)
-
-#print(graf_starost)
+graf_starosti <- grid.arrange(graf_starost2000, graf_starost2020,graf_starost2007, graf_starost2008, nrow = 2)
 
 #Graf stanovanjskih razmer
 
@@ -110,22 +113,16 @@ graf_stroski <- ggplot(stanovanjski_stroski, aes(x=leto,y=stevilo_gospodinjstev,
 #Zemljevid
 
 zemljevid <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/SVN_adm_shp.zip",
-                                                       "SVN_adm1", encoding = "UTF-8")
+                             "SVN_adm1", mapa = "zemljevid", encoding = "UTF-8")
+
+zemljevid$NAME_1 <- c("Gorenjska", "Goriška","Jugovzhodna", "Koroška", "Primorsko-notranjska", "Obalno-kraška", 
+                      "Osrednjeslovenska", "Podravska", "Pomurska", "Savinjska", "Posavska", "Zasavska")
+
+zemljevid <- fortify(zemljevid) 
+
+pdf("slike/zemljevid_regije.pdf", width=6, height=4)
 
 
-#LINEARNA REGRESIJA
-
-#Linearen model za skupno število stanovanj v odvisnosti od leta
-
-podatki <- stanovanjske_razmere %>% group_by(leto)  %>% 
-  summarize(stanovanja_skupno = sum(stevilo_stanovanj))
-podatki$leto <- as.numeric(podatki$leto)
-fit <- lm(stanovanja_skupno ~ leto , data=podatki)
-
-
-graf <- ggplot(podatki, aes(x = leto, y = stanovanja_skupno)) + 
-  geom_point() + geom_smooth(method=lm, se=FALSE) + 
-  labs(x = "Leto" , y = "SKupno število stanovanj" , title = "Ponazoritev premice linearne regresije - \n skupno število stanovanj v odvisnosti od leta")
 
 
 

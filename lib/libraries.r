@@ -7,5 +7,6 @@ library(shiny)
 library(readr)
 library(dplyr)
 library(tidyverse)
+library(gridExtra)
 
 source("lib/uvozi.zemljevid.r", encoding="UTF-8")
