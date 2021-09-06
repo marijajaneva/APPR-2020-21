@@ -133,6 +133,9 @@ Iz grafa vidimo, da stanovanjski stroški predtavljajo večinoma srednje breme p
 source("analiza/analiza.r", encoding="UTF-8")
 ```
 
+```{r graf, echo=FALSE, message=FALSE, warning=FALSE}
+
+graf + xlab("Leto") + ylab("Število stanovanj") + ggtitle("Ponazoritev premice linearne regresije - \n skupno število stanovanj slabe kakovosti v odvisnosti od leta")
 
 
                              

@@ -5,6 +5,7 @@ izseljeni <- selitve_po_regijah %>% group_by(regija_odselitve, leto) %>%
   
   summarize(izseljeni_sum = sum(stevilo_preseljencev))
 
+
 graf_izseljencev <- ggplot(izseljeni, aes(leto, izseljeni_sum)) +
   geom_line(aes(group = regija_odselitve, colour = factor(regija_odselitve)))+
   theme(axis.text.x = element_text(angle = 90))+
@@ -45,6 +46,7 @@ starost <- selitve_po_starostnih_skupinah %>% group_by(starostna_skupina, leto) 
   
   summarize(starost_sum = sum(stevilo_selitev))
 
+
 leto2000 <- starost[starost$leto == "2000", c(1:3)]
 
 graf_starost2000 <- ggplot(leto2000, aes(starostna_skupina, starost_sum)) +
@@ -63,7 +65,6 @@ graf_starost2007 <- ggplot(leto2007, aes(starostna_skupina, starost_sum)) +
   xlab("Starostna skupina")+
   ylab("Število selitev")
 
-
 leto2008 <- starost[starost$leto == "2008", c(1:3)]
 
 graf_starost2008 <- ggplot(leto2008, aes(starostna_skupina, starost_sum)) +
@@ -72,7 +73,6 @@ graf_starost2008 <- ggplot(leto2008, aes(starostna_skupina, starost_sum)) +
   labs(title = "Selitve po starosti leta 2008")+
   xlab("Starostna skupina")+
   ylab("Število selitev")
-
 
 leto2020 <- starost[starost$leto == "2020", c(1:3)]
 
@@ -83,7 +83,10 @@ graf_starost2020 <- ggplot(leto2020, aes(starostna_skupina, starost_sum)) +
   xlab("Starostna skupina")+
   ylab("Število selitev")
 
+
 graf_starosti <- grid.arrange(graf_starost2000, graf_starost2020,graf_starost2007, graf_starost2008, nrow = 2)
+
+print(graf_starosti)
 
 #Graf stanovanjskih razmer
 

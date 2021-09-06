@@ -67,6 +67,7 @@ selitve_po_starostnih_skupinah <- selitve_po_starostnih_skupinah %>% pivot_longe
 
 selitve_po_starostnih_skupinah$starostna_skupina <- str_replace(selitve_po_starostnih_skupinah$starostna_skupina, "let", " ")
 
+selitve_po_starostnih_skupinah$starostna_skupina <- str_replace(selitve_po_starostnih_skupinah$starostna_skupina, "5-9", "05-9")
 #Tabela 3: Stanovanjske razmere
 
 stanovanjske_razmere <- read.csv("podatki/stanovanjske_razmere.csv",
